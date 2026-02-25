@@ -4,25 +4,25 @@ import { FiMessageSquare, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const testimonials = [
     {
-        name: 'Prof. Ahmad Khan',
+        name: 'Prof.M shoaib',
         role: 'University Supervisor',
         text: 'Hassan demonstrates exceptional problem-solving skills and a deep understanding of frontend architecture. His MedStep project showcased professional-grade modular design.',
         gradient: 'linear-gradient(135deg, #3b82f6, #06b6d4)',
     },
     {
-        name: 'Ali Raza',
+        name: 'M.safwan Asim',
         role: 'Team Member — MedStep Project',
         text: 'Working with Hassan was a great experience. He took the lead on the frontend, building reusable components and ensuring a consistent UI across all modules.',
         gradient: 'linear-gradient(135deg, #8b5cf6, #ec4899)',
     },
     {
-        name: 'Sara Malik',
+        name: 'IQRA MURTAZA',
         role: 'Classmate & Study Partner',
         text: 'Hassan has a talent for making complex things simple. His JavaScript knowledge is impressive, and he is always willing to help others understand difficult concepts.',
         gradient: 'linear-gradient(135deg, #06b6d4, #10b981)',
     },
     {
-        name: 'Usman Tariq',
+        name: 'AHMAD MALIK',
         role: 'Freelance Client',
         text: 'Hassan delivered a polished, responsive e-commerce frontend that exceeded my expectations. Great communication and attention to detail throughout the project.',
         gradient: 'linear-gradient(135deg, #f59e0b, #ef4444)',
