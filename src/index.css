@@ -1,0 +1,491 @@
+@import "tailwindcss";
+
+/* ========================================
+   CUSTOM PROPERTIES & DESIGN TOKENS
+   ======================================== */
+:root {
+    --color-bg-primary: #0a0e1a;
+    --color-bg-secondary: #111827;
+    --color-bg-card: rgba(17, 24, 39, 0.6);
+    --color-text-primary: #e2e8f0;
+    --color-text-secondary: #94a3b8;
+    --color-text-heading: #f1f5f9;
+    --color-accent-blue: #3b82f6;
+    --color-accent-purple: #8b5cf6;
+    --color-accent-cyan: #06b6d4;
+    --color-gradient-start: #3b82f6;
+    --color-gradient-end: #8b5cf6;
+    --color-border-glass: rgba(148, 163, 184, 0.1);
+    --glass-bg: rgba(17, 24, 39, 0.5);
+    --glass-blur: 16px;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+/* ========================================
+   LIGHT THEME
+   ======================================== */
+[data-theme='light'] {
+    --color-bg-primary: #f8fafc;
+    --color-bg-secondary: #e2e8f0;
+    --color-bg-card: rgba(255, 255, 255, 0.7);
+    --color-text-primary: #1e293b;
+    --color-text-secondary: #64748b;
+    --color-text-heading: #0f172a;
+    --color-border-glass: rgba(148, 163, 184, 0.2);
+    --glass-bg: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme='light'] body {
+    background-color: #f8fafc;
+}
+
+[data-theme='light'] .hero-bg::before {
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+}
+
+[data-theme='light'] .hero-bg::after {
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+}
+
+[data-theme='light'] .profile-img {
+    border-color: #f8fafc;
+}
+
+[data-theme='light'] .timeline-dot {
+    border-color: #f8fafc;
+}
+
+[data-theme='light'] ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+/* ========================================
+   BLINK CURSOR FOR TYPING EFFECT
+   ======================================== */
+@keyframes blink-cursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* ========================================
+   BASE & RESET
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    color: var(--color-text-heading);
+    line-height: 1.2;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--color-accent-blue), var(--color-accent-purple));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, var(--color-accent-purple), var(--color-accent-blue));
+}
+
+/* ========================================
+   GLASSMORPHISM CARD
+   ======================================== */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--color-border-glass);
+    border-radius: 16px;
+}
+
+/* ========================================
+   GRADIENT TEXT
+   ======================================== */
+.gradient-text {
+    background: linear-gradient(135deg, var(--color-accent-blue), var(--color-accent-purple), var(--color-accent-cyan));
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 4s ease infinite;
+}
+
+@keyframes gradient-shift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ========================================
+   GLOW BUTTON
+   ======================================== */
+.glow-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-family: var(--font-body);
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    background: linear-gradient(135deg, var(--color-accent-blue), var(--color-accent-purple));
+    transition: all 0.3s ease;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.glow-btn::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--color-accent-blue), var(--color-accent-purple), var(--color-accent-cyan));
+    border-radius: 14px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    filter: blur(12px);
+}
+
+.glow-btn:hover::before {
+    opacity: 1;
+}
+
+.glow-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+}
+
+.glow-btn-outline {
+    background: transparent;
+    border: 1px solid var(--color-border-glass);
+    color: var(--color-text-primary);
+}
+
+.glow-btn-outline:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--color-accent-blue);
+}
+
+/* ========================================
+   SECTION
+   ======================================== */
+.section {
+    padding: 100px 0;
+    position: relative;
+}
+
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto 60px;
+}
+
+/* ========================================
+   HERO ANIMATED BG
+   ======================================== */
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.hero-bg::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    animation: float-orb 8s ease-in-out infinite;
+}
+
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+    bottom: -100px;
+    left: -100px;
+    animation: float-orb 10s ease-in-out infinite reverse;
+}
+
+@keyframes float-orb {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -30px) scale(1.05);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) scale(0.95);
+    }
+}
+
+/* ========================================
+   PROFILE PHOTO GLOW
+   ======================================== */
+.profile-glow-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-glow-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg,
+            var(--color-accent-blue),
+            var(--color-accent-purple),
+            var(--color-accent-cyan),
+            var(--color-accent-blue));
+    animation: rotate-glow 3s linear infinite;
+    z-index: 0;
+}
+
+.profile-glow-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg,
+            var(--color-accent-blue),
+            var(--color-accent-purple),
+            var(--color-accent-cyan),
+            var(--color-accent-blue));
+    animation: rotate-glow 3s linear infinite;
+    filter: blur(20px);
+    opacity: 0.5;
+    z-index: -1;
+}
+
+@keyframes rotate-glow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.profile-img {
+    position: relative;
+    z-index: 1;
+    border-radius: 50%;
+    border: 4px solid var(--color-bg-primary);
+    object-fit: cover;
+}
+
+/* ========================================
+   SKILL PROGRESS BAR
+   ======================================== */
+.skill-progress-track {
+    width: 100%;
+    height: 8px;
+    background: rgba(148, 163, 184, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skill-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--color-accent-blue), var(--color-accent-purple));
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   TIMELINE
+   ======================================== */
+.timeline {
+    position: relative;
+    padding-left: 32px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--color-accent-blue), var(--color-accent-purple), transparent);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 32px;
+    padding-left: 16px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -32px;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-accent-blue), var(--color-accent-purple));
+    border: 3px solid var(--color-bg-primary);
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+}
+
+/* ========================================
+   TECH BADGE
+   ======================================== */
+.tech-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 20px;
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--color-accent-blue);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* ========================================
+   FORM STYLES
+   ======================================== */
+.form-input {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(17, 24, 39, 0.8);
+    border: 1px solid var(--color-border-glass);
+    border-radius: 12px;
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.form-input::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 0.6;
+}
+
+.form-input.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.error-text {
+    font-size: 0.8rem;
+    color: #ef4444;
+    margin-top: 4px;
+}
+
+/* ========================================
+   RESPONSIVE UTILITIES
+   ======================================== */
+@media (max-width: 768px) {
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 40px;
+    }
+}
